@@ -209,6 +209,14 @@ class App(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("green")
 
+        # Initialize instance variables
+        self.frame = None  # The main frame of the application
+        self.calendar = None  # The custom calendar widget
+        self.event_window = None  # The window for adding events
+        self.title_entry = None  # The entry widget for the event title
+        self.event_type = None  # The variable for the event type dropdown
+        self.type_dropdown = None  # The dropdown menu for selecting event types
+
         self.frame = ctk.CTkFrame(self)
         self.frame.pack(fill="both", expand=True)
 
