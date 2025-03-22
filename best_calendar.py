@@ -209,6 +209,13 @@ class App(ctk.CTk):
     :ivar title_entry: The entry widget for the event title.
     :ivar event_type: The variable for the event type dropdown.
     :ivar type_dropdown: The dropdown menu for selecting event types.
+    :ivar reminder_window: The window for managing reminders.
+    :ivar reminders_list: The list of reminders.
+    :ivar reminder_present: The label displaying reminders.
+    :ivar selected_date: The currently selected date in the calendar.
+    :ivar sidebar: The sidebar with buttons for tasks, reminders, and quotes.
+    :ivar title_entry: The entry widget for the event title.
+    :ivar type_dropdown: The dropdown menu for selecting event types.
     """
 
     def __init__(self):
@@ -231,6 +238,11 @@ class App(ctk.CTk):
         self.type_dropdown = None
         self.reminder_window = None
         self.reminders_list = []
+        self.reminder_present = None
+        self.selected_date = None
+        self.sidebar = None
+        self.title_entry = None
+        self.type_dropdown = None
 
         # Set up the main frame
         self.frame = ctk.CTkFrame(self)
