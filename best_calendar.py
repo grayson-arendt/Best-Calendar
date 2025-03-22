@@ -130,16 +130,16 @@ class Agenda(Calendar):
             text = '%s\n' % date.day + '\n'.join([self.calevents[ev]['text'] for ev in ev_ids])
             label.configure(text=text)
 
-@dataclass
+:dataclass
 class Event:
     """
     A class representing an event.
 
-    @ivar day: The day of the event.
-    @ivar month: The month of the event.
-    @ivar year: The year of the event.
-    @ivar title: The title of the event.
-    @ivar type: The type of the event (e.g., Exam, Homework, Quiz).
+    :ivar day: The day of the event.
+    :ivar month: The month of the event.
+    :ivar year: The year of the event.
+    :ivar title: The title of the event.
+    :ivar type: The type of the event (e.g., Exam, Homework, Quiz).
     """
     day: int
     month: int
@@ -152,16 +152,16 @@ class BestCalendar(Agenda):
     """
     A custom calendar class for managing events.
 
-    @ivar _is_event_triggered: A flag indicating whether an event is triggered.
-    @ivar _events: A list of events stored as tuples of event IDs and Event objects.
+    :ivar _is_event_triggered: A flag indicating whether an event is triggered.
+    :ivar _events: A list of events stored as tuples of event IDs and Event objects.
     """
 
     def __init__(self, *args, **kwargs):
         """
         Initialize the calendar.
 
-        @param args: Positional arguments for the parent class.
-        @param kwargs: Keyword arguments for the parent class.
+        :param args: Positional arguments for the parent class.
+        :param kwargs: Keyword arguments for the parent class.
         """
         super().__init__(*args, **kwargs)
         self._is_event_triggered = False
@@ -171,7 +171,7 @@ class BestCalendar(Agenda):
         """
         Add an event to the calendar.
 
-        @param event: The Event object to add.
+        :param event: The Event object to add.
         """
         event_id = self.calevent_create(date(event.year, event.month, event.day), event.title, tags=event.type)
         self._events.append((event_id, event))
@@ -180,7 +180,7 @@ class BestCalendar(Agenda):
         """
         Get the currently selected date in the calendar.
 
-        @return: The selected date as a string.
+        :return: The selected date as a string.
         """
         return self.get_date()
 
@@ -194,12 +194,12 @@ class App(ctk.CTk):
         """
         Initialize the application.
 
-        @ivar frame: The main frame of the application.
-        @ivar calendar: The custom calendar widget.
-        @ivar event_window: The window for adding events.
-        @ivar title_entry: The entry widget for the event title.
-        @ivar event_type: The variable for the event type dropdown.
-        @ivar type_dropdown: The dropdown menu for selecting event types.
+        :ivar frame: The main frame of the application.
+        :ivar calendar: The custom calendar widget.
+        :ivar event_window: The window for adding events.
+        :ivar title_entry: The entry widget for the event title.
+        :ivar event_type: The variable for the event type dropdown.
+        :ivar type_dropdown: The dropdown menu for selecting event types.
         """
 
         super().__init__()
@@ -237,7 +237,7 @@ class App(ctk.CTk):
         """
         Handle the event when a date is clicked in the calendar.
 
-        @param event: The event object triggered by the click.
+        :param event: The event object triggered by the click.
         """
         selected_date = self.calendar.get_selected_date()
         self.open_event_menu(selected_date)
@@ -246,7 +246,7 @@ class App(ctk.CTk):
         """
         Open the event menu for adding a new event.
 
-        @param selected_date: The selected date in MM/DD/YY format.
+        :param selected_date: The selected date in MM/DD/YY format.
         """
         # Create a new CTkToplevel window
         self.event_window = ctk.CTkToplevel(self)
