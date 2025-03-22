@@ -188,19 +188,20 @@ class BestCalendar(Agenda):
 class App(ctk.CTk):
     """
     The main application class for the calendar app.
-
-    @ivar frame: The main frame of the application.
-    @ivar calendar: The custom calendar widget.
-    @ivar event_window: The window for adding events.
-    @ivar title_entry: The entry widget for the event title.
-    @ivar event_type: The variable for the event type dropdown.
-    @ivar type_dropdown: The dropdown menu for selecting event types.
     """
 
     def __init__(self):
         """
         Initialize the application.
+
+        @ivar frame: The main frame of the application.
+        @ivar calendar: The custom calendar widget.
+        @ivar event_window: The window for adding events.
+        @ivar title_entry: The entry widget for the event title.
+        @ivar event_type: The variable for the event type dropdown.
+        @ivar type_dropdown: The dropdown menu for selecting event types.
         """
+
         super().__init__()
         self.title("Best Calendar")
         self.geometry("700x600")
