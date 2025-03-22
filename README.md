@@ -32,17 +32,17 @@ Better Calendar is a calendar interface designed with college students in mind. 
 - Consider writing in JavaScript or React
 - Proper implementation of GitHub branches for developing ideas
 
-#### Code Documentation (Hosted with GitHub Pages, built with pydoctor)
+## Code Documentation (Hosted with GitHub Pages, built with pydoctor)
 https://grayson-arendt.github.io/Best-Calendar/
 
-#### Installation
+## Installation
 ```bash
 git clone https://github.com/grayson-arendt/Best-Calendar.git
 cd Best-Calendar
 python3 -m pip install -r requirements.txt
 ```
 
-#### Running Calendar
+## Running Calendar
 
 ```bash
 python3 best_calendar.py
