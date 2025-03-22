@@ -15,9 +15,9 @@ Built with VSCode
 Programmed primarily in Python, using Tkinter. Used GitHub Copilot for debugging.
 
 ## Hackathon Details
-**Hackathon Name**: COD HACKATHON 2025
-**Time Allotted**: 5 hours
-**Challenge** Think of some tool that would help you in your school life. This can be something like a reminder app, a study tracker, or any other tool that would help you be more productive as a student.
+- **Hackathon Name**: COD HACKATHON 2025
+- **Time Allotted**: 5 hours
+- **Challenge** Think of some tool that would help you in your school life. This can be something like a reminder app, a study tracker, or any other tool that would help you be more productive as a student.
 
 ## Team
 Grayson Arendt
