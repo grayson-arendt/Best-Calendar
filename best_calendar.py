@@ -130,7 +130,7 @@ class Agenda(Calendar):
             text = '%s\n' % date.day + '\n'.join([self.calevents[ev]['text'] for ev in ev_ids])
             label.configure(text=text)
 
-:dataclass
+@dataclass
 class Event:
     """
     A class representing an event.
