@@ -29,7 +29,7 @@ Better Calendar is a calendar interface designed with college students in mind. 
 - Trying to save the user's inputs
 - Communication
 
-**Improvement Considerations**:
+**Improvements**:
 - Saving user data to file
 - Structure improvement, can reduce bloat in best_calendar.py by splitting into separate files
 
