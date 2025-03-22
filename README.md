@@ -12,7 +12,7 @@ Better Calendar is a calendar interface designed with college students in mind. 
 Built with VSCode
 - User can add events and reminders to calendar
 
-Programmed primarily in Python, using Tkinter
+Programmed primarily in Python, using Tkinter. Used GitHub Copilot for debugging.
 
 ## Hackathon Details
 **Hackathon Name**: COD HACKATHON 2025
