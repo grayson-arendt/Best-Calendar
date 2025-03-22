@@ -19,10 +19,10 @@ Better Calendar is a calendar interface designed with college students in mind. 
 - **Challenge** Think of some tool that would help you in your school life. This can be something like a reminder app, a study tracker, or any other tool that would help you be more productive as a student.
 
 ## Team
-Grayson Arendt
-Mari Dauz
-Nick Kolesar
-Mily Mendez
+- Grayson Arendt
+- Mari Dauz
+- Nick Kolesar
+- Mily Mendez
 
 ## Challenges and Improvements
 **Challenges**:
