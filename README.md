@@ -1,18 +1,17 @@
 # Better Calendar
 Gone are the days of forgetting you had a quiz today or that your lab report was due.
-
 Better Calendar is a calendar interface designed with college students in mind. It boasts a simple interface with the ability to set reminders, filter deadlines by type, and even a quote of the day feature.
 
 ## Features
 - Calendar
-- Organize deadlines or events by type (exams, quizzes, labs, etc..)
-- Quote of the Day
+- Organize events by type (exams, quizzes, and homework)
+- Reminder list
+- Quote of the day
 
 ## Technical Details:
-Built with VSCode
-- User can add events and reminders to calendar
-
-Programmed primarily in Python, using Tkinter. Used GitHub Copilot for debugging.
+- Built with VSCode
+- Programmed primarily in Python, using Tkinter. Used GitHub Copilot for debugging
+- User can add events to the calendar, view upcoming tasks, add/remove reminders, and view a "quote of the day"
 
 ## Hackathon Details
 - **Hackathon Name**: COD HACKATHON 2025
@@ -30,8 +29,8 @@ Mily Mendez
 - Trying to save the user's inputs
 - Communication
 **Improvement Considerations**:
-Consider writing in JavaScript or React
-Proper implementation of GitHub branches for developing ideas
+- Consider writing in JavaScript or React
+- Proper implementation of GitHub branches for developing ideas
 
 #### Code Documentation (Hosted with GitHub Pages, built with pydoctor)
 https://grayson-arendt.github.io/Best-Calendar/
