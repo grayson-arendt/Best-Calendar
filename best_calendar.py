@@ -517,8 +517,9 @@ class App(ctk.CTk):
             command=confirm_removal,
         ).pack(pady=10)
 
-# Create the main Tkinter window
-root = App()
+if __name__ == "__main__":
+    # Create the main Tkinter window
+    root = App()
 
-# Run the Tkinter main loop
-root.mainloop()
+    # Run the Tkinter main loop
+    root.mainloop()
