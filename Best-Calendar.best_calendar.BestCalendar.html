@@ -12,8 +12,8 @@
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="readthedocstheme.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
     <link rel="canonical" href="https://grayson-arendt.github.io/Best-Calendar/Best-Calendar.best_calendar.BestCalendar.html" />
 </head>
@@ -96,14 +96,11 @@
 
 
   </div>
-</nav>
-    
-    <div class="container-fluid">
 
-      <!-- Side navigation -->
-      <div class="sidebarcontainer" style="display: none;">
-        
-        <div class="sidebar"><nav class="sidebar">
+    
+        <!-- Side navigation -->
+      <div class="sidebarcontainer">
+        <nav class="sidebar">
   
 
   <div>
@@ -312,19 +309,20 @@
   </div>
 
 </nav>
-        </div>
-        <div id="collapseSideBar">
-          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
-          </a>
-        </div> 
-        <script src="sidebartoggle.js" type="text/javascript"></script>
-       
+        <!-- No sidebar toggle for read the docs theme, the sidebar is always
+          visible when the screen is width enough.
+        -->
       </div>
+
+    </nav>
+    
+    <div class="container-fluid">
 
       <div id="main" class="">
         
 
         
+
 
         <div class="page-header">
           <h1 class="class"><code><code><a href="index.html" class="internal-link">Best-Calendar</a></code><wbr></wbr>.<code><a href="Best-Calendar.best_calendar.html" class="internal-link" title="Best-Calendar.best_calendar">best_calendar</a></code><wbr></wbr>.<code><a href="Best-Calendar.best_calendar.BestCalendar.html" class="internal-link" title="Best-Calendar.best_calendar.BestCalendar">BestCalendar</a></code></code></h1>
@@ -338,7 +336,7 @@
         </div>
 
         <div class="extrasDocstring">
-          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">BestCalendar</span>(<a href="Best-Calendar.best_calendar.Agenda.html" class="internal-link" title="Best-Calendar.best_calendar.Agenda">Agenda</a>): <a href="https://github.com/grayson-arendt/Best-Calendar/tree/e7e471ea1932bde1385682d4630265f1ecf0daf6/best_calendar.py#L151" class="sourceLink">(source)</a></code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="Best-Calendar.best_calendar.BestCalendar.__init__">BestCalendar(*args, **kwargs)</a></code></p>
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">BestCalendar</span>(<a href="Best-Calendar.best_calendar.Agenda.html" class="internal-link" title="Best-Calendar.best_calendar.Agenda">Agenda</a>): <a href="https://github.com/grayson-arendt/Best-Calendar/tree/ae7171dce8264e83565411e439f5425e6cb40915/best_calendar.py#L151" class="sourceLink">(source)</a></code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="Best-Calendar.best_calendar.BestCalendar.__init__">BestCalendar(*args, **kwargs)</a></code></p>
           <p><a href="classIndex.html#Best-Calendar.best_calendar.BestCalendar">View In Hierarchy</a></p>
         </div>
 
@@ -423,7 +421,7 @@
     
     
     <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, *args, **kwargs)</span>:
-    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/e7e471ea1932bde1385682d4630265f1ecf0daf6/best_calendar.py#L159">
+    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/ae7171dce8264e83565411e439f5425e6cb40915/best_calendar.py#L159">
       
       (source)
     </a>
@@ -453,7 +451,7 @@
     
     
     <span class="py-keyword">def</span> <span class="py-defname">add_event</span><span class="function-signature">(self, event: <code><a href="Best-Calendar.best_calendar.Event.html" class="internal-link" title="Best-Calendar.best_calendar.Event">Event</a></code>)</span>:
-    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/e7e471ea1932bde1385682d4630265f1ecf0daf6/best_calendar.py#L170">
+    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/ae7171dce8264e83565411e439f5425e6cb40915/best_calendar.py#L170">
       
       (source)
     </a>
@@ -482,7 +480,7 @@
     
     
     <span class="py-keyword">def</span> <span class="py-defname">get_selected_date</span><span class="function-signature">(self)</span>:
-    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/e7e471ea1932bde1385682d4630265f1ecf0daf6/best_calendar.py#L179">
+    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/ae7171dce8264e83565411e439f5425e6cb40915/best_calendar.py#L179">
       
       (source)
     </a>
@@ -510,7 +508,7 @@
   <div class="functionHeader">
     
     <span class="py-defname">_events</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
-    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/e7e471ea1932bde1385682d4630265f1ecf0daf6/best_calendar.py#L168">
+    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/ae7171dce8264e83565411e439f5425e6cb40915/best_calendar.py#L168">
       
       (source)
     </a>
@@ -537,7 +535,7 @@
   <div class="functionHeader">
     
     <span class="py-defname">_is_event_triggered</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
-    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/e7e471ea1932bde1385682d4630265f1ecf0daf6/best_calendar.py#L167">
+    <a class="sourceLink" href="https://github.com/grayson-arendt/Best-Calendar/tree/ae7171dce8264e83565411e439f5425e6cb40915/best_calendar.py#L167">
       
       (source)
     </a>
@@ -559,21 +557,20 @@
     </div>
 
     <footer class="navbar navbar-default">
-
+    <hr />
+    
+    
+    <div class="container-fluid">
+      <a href="index.html">API Documentation</a> for <a href="https://github.com/grayson-arendt/Best-Calendar" class="projecthome">Best-Calendar</a>,
+    generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+      24.11.2 at 2025-03-22 18:42:40.
+    </div>
+    
+    <script src="ajax.js" type="text/javascript"></script>
+    <script src="searchlib.js" type="text/javascript"></script>
+    <script src="search.js" type="text/javascript"></script>
   
-  <div class="container-fluid">
-    <a href="index.html">API Documentation</a> for <a href="https://github.com/grayson-arendt/Best-Calendar" class="projecthome">Best-Calendar</a>,
-  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    24.11.2 at 2025-03-22 18:38:58.
-  </div>
-
-  <!-- Search related scripts needs to be loaded at the end of HTML 
-    parsing not to introduce overhead and display HTML data asap -->
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="searchlib.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
-</footer>
+  </footer>
   
     <script src="pydoctor.js" type="text/javascript"></script>
 
