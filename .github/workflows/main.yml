@@ -35,6 +35,7 @@ jobs:
             --html-base-url=https://$GITHUB_REPOSITORY_OWNER.github.io/${GITHUB_REPOSITORY#*/} \
             --html-output=./apidocs \
             --docformat=restructuredtext \
+            --theme=readthedocs \
             --intersphinx=https://docs.python.org/3/objects.inv \
             ./
 
