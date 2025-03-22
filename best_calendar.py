@@ -381,7 +381,7 @@ class App(ctk.CTk):
         # Format the events for display
         if sorted_events:
             event_text = "\n\n".join(
-                f"Name: {event.title}  | Date: {event.month}/{event.day}/{event.year}" for _, event in sorted_events
+                f"Name: {event.title}\nDate: {event.month}/{event.day}/{event.year}\n ---" for _, event in sorted_events
             )
         else:
             event_text = "No events available."
@@ -392,7 +392,7 @@ class App(ctk.CTk):
             text=event_text,
             font=("Modern", 16),
             wraplength=250,
-            justify="left",
+            justify="center",
         ).pack(pady=20)
 
     def quote(self):
