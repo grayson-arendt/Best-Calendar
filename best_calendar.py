@@ -1,8 +1,10 @@
 from tkinter import *
+from tkinter import messagebox
 from tkcalendar import Calendar
 from dataclasses import dataclass
 from datetime import date
 import customtkinter as ctk
+import random
 
 class Agenda(Calendar):
     """
@@ -167,6 +169,11 @@ class BestCalendar(Agenda):
         self._is_event_triggered = False
         self._events = []
 
+        # Configure tags for event types
+        self.tag_config("Exam", background="red", foreground="white")
+        self.tag_config("Quiz", background="yellow", foreground="black")
+        self.tag_config("Homework", background="blue", foreground="white")
+
     def add_event(self, event: Event):
         """
         Add an event to the calendar.
@@ -184,6 +191,13 @@ class BestCalendar(Agenda):
         """
         return self.get_date()
 
+    def get_events(self):
+        """
+        Get all the events.
+
+        :return: All the events as a list of Event objects.
+        """
+        return self._events
 
 class App(ctk.CTk):
     """
@@ -201,7 +215,6 @@ class App(ctk.CTk):
         """
         Initialize the application.
         """
-
         super().__init__()
         self.title("Best Calendar")
         self.geometry("700x600")
@@ -210,36 +223,109 @@ class App(ctk.CTk):
         ctk.set_default_color_theme("green")
 
         # Initialize instance variables
-        self.frame = None  # The main frame of the application
-        self.calendar = None  # The custom calendar widget
-        self.event_window = None  # The window for adding events
-        self.title_entry = None  # The entry widget for the event title
-        self.event_type = None  # The variable for the event type dropdown
-        self.type_dropdown = None  # The dropdown menu for selecting event types
+        self.frame = None
+        self.calendar = None
+        self.event_window = None
+        self.title_entry = None
+        self.event_type = None
+        self.type_dropdown = None
+        self.reminder_window = None
+        self.reminders_list = []
 
+        # Set up the main frame
         self.frame = ctk.CTkFrame(self)
         self.frame.pack(fill="both", expand=True)
 
         # Create the calendar
-        self.calendar = BestCalendar(self.frame, year=2025, month=3, day=22, font="Arial 14", locale='en_US', disabledforeground='red',
-               cursor="hand2", background=ctk.ThemeManager.theme["CTkFrame"]["fg_color"][1],
-               selectbackground=ctk.ThemeManager.theme["CTkButton"]["fg_color"][1])
-
+        self.calendar = BestCalendar(
+            self.frame,
+            year=2025,
+            month=3,
+            day=22,
+            font="Modern 14",
+            locale="en_US",
+            disabledforeground="red",
+            cursor="hand2",
+            background=ctk.ThemeManager.theme["CTkFrame"]["fg_color"][1],
+            selectbackground=ctk.ThemeManager.theme["CTkButton"]["fg_color"][1],
+        )
         self.calendar.pack(fill="both", expand=True, pady=20)
-
-        # Bind the click event to the calendar
         self.calendar.bind("<<CalendarSelected>>", self.on_date_click)
+
+        # Create the sidebar
+        self._create_sidebar()
+
+    def _create_sidebar(self):
+        """Create the sidebar with buttons for tasks, reminders, and quotes."""
+        self.sidebar = ctk.CTkFrame(self.frame, height=100)
+        self.sidebar.pack(side="bottom", fill="x", expand=False)
+
+        # Configure grid layout for the sidebar
+        self.sidebar.grid_columnconfigure(0, weight=1)
+        self.sidebar.grid_columnconfigure(1, weight=1)
+        self.sidebar.grid_columnconfigure(2, weight=1)
+
+        # Task button
+        ctk.CTkButton(
+            self.sidebar,
+            text="Tasks",
+            command=self.tasks,
+            fg_color="#a47864",
+            hover_color="#815947",
+            text_color="black",
+            font=("Modern", 14, "bold"),
+            corner_radius=0,
+        ).grid(row=0, column=0, sticky="nsew")
+
+        # Reminder button
+        ctk.CTkButton(
+            self.sidebar,
+            text="Reminders",
+            command=self.reminders,
+            fg_color="#a47864",
+            hover_color="#815947",
+            text_color="black",
+            font=("Modern", 14, "bold"),
+            corner_radius=0,
+        ).grid(row=0, column=1, sticky="nsew")
+
+        # Quote button
+        ctk.CTkButton(
+            self.sidebar,
+            text="Quote of the Day",
+            command=self.quote,
+            fg_color="#a47864",
+            hover_color="#815947",
+            text_color="black",
+            font=("Modern", 14, "bold"),
+            corner_radius=0,
+        ).grid(row=0, column=2, sticky="nsew")
 
     def submit_event(self):
         """
         Submit a new event to the calendar.
         """
-        title = self.title_entry.get()
-        event_type_value = self.event_type.get()
-        if title:  # Ensure the title is not empty
+        try:
+            title = self.title_entry.get()
+            event_type_value = self.event_type.get()
+            if not title:
+                messagebox.showerror("Error", "Event title cannot be empty!")
+                return
+
+            # Ensure selected_date is in MM/DD/YY format
+            if not self.selected_date:
+                messagebox.showerror("Error", "No date selected!")
+                return
+
+            month, day, year = map(int, self.selected_date.split('/'))
+            year += 2000  # Convert 2-digit year to 4-digit year
+
+            # Create and add the event
             new_event = Event(day, month, year, title, event_type_value)
             self.calendar.add_event(new_event)
             self.event_window.destroy()  # Close the event window
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid date format: {e}")
 
     def on_date_click(self, event):
         """
@@ -247,23 +333,14 @@ class App(ctk.CTk):
 
         :param event: The event object triggered by the click.
         """
-        selected_date = self.calendar.get_selected_date()
-        self.open_event_menu(selected_date)
+        self.selected_date = self.calendar.get_selected_date()
+        self.open_event_menu()
 
-    def open_event_menu(self, selected_date):
-        """
-        Open the event menu for adding a new event.
-
-        :param selected_date: The selected date in MM/DD/YY format.
-        """
-        # Create a new CTkToplevel window
+    def open_event_menu(self):
+        """Open the event menu for adding a new event."""
         self.event_window = ctk.CTkToplevel(self)
         self.event_window.title("Add Event")
         self.event_window.geometry("300x250")
-
-        # Parse the selected date (MM/DD/YY format)
-        month, day, year = map(int, selected_date.split('/'))
-        year += 2000  # Convert 2-digit year to 4-digit year
 
         # Event title input
         ctk.CTkLabel(self.event_window, text="Event Title:").pack(pady=5)
@@ -273,13 +350,160 @@ class App(ctk.CTk):
         # Event type dropdown
         ctk.CTkLabel(self.event_window, text="Event Type:").pack(pady=5)
         self.event_type = StringVar(self.event_window)
-        self.event_type.set("Exam")  # Default value
-        self.type_dropdown = ctk.CTkOptionMenu(self.event_window, variable=self.event_type, values=["Exam", "Homework", "Quiz"])
+        self.event_type.set("Exam") # Default value
+        self.type_dropdown = ctk.CTkOptionMenu(
+            self.event_window,
+            variable=self.event_type,
+            values=["Exam", "Quiz", "Homework"],
+        )
         self.type_dropdown.pack(pady=5)
 
         # Submit button
-        ctk.CTkButton(self.event_window, text="Add Event", command=self.submit_event, fg_color="blue", hover_color="darkblue", text_color="white").pack(pady=30)
+        ctk.CTkButton(
+            self.event_window,
+            text="Add Event",
+            command=self.submit_event,
+            fg_color="blue",
+            hover_color="darkblue",
+            text_color="white",
+        ).pack(pady=30)
 
+    def tasks(self):
+        """Display all events in a new window, sorted by closest date."""
+        task_window = ctk.CTkToplevel(self)
+        task_window.title("Upcoming Tasks")
+        task_window.geometry("300x400")
+
+        # Retrieve and sort events by date
+        events = self.calendar.get_events()
+        sorted_events = sorted(events, key=lambda e: date(e[1].year, e[1].month, e[1].day)) # Sort by event date
+
+        # Format the events for display
+        if sorted_events:
+            event_text = "\n\n".join(
+                f"Name: {event.title}  | Date: {event.month}/{event.day}/{event.year}" for _, event in sorted_events
+            )
+        else:
+            event_text = "No events available."
+
+        # Display the events in the task window
+        ctk.CTkLabel(
+            task_window,
+            text=event_text,
+            font=("Modern", 16),
+            wraplength=250,
+            justify="left",
+        ).pack(pady=20)
+
+    def quote(self):
+        """Display a random motivational quote in a new window."""
+        quotes = [
+            "\"100s only\"", "\"You got this\"", "\"One step at a time\"",
+            "\"Lock in\"", "\"Think about the money\"", "\"Get that degree\"", "\"Suffer now, spend later\""
+        ]
+        quote = random.choice(quotes)
+
+        quote_window = ctk.CTkToplevel(self)
+        quote_window.title("Quote of the Day!")
+        quote_window.geometry("300x100")
+        ctk.CTkLabel(quote_window, text=quote, font=("Modern", 20), wraplength=250).pack(pady=20)
+
+    def reminders(self):
+        """Open the reminders window to manage reminders."""
+        if self.reminder_window and self.reminder_window.winfo_exists():
+            self.reminder_window.lift()
+            return
+
+        self.reminder_window = ctk.CTkToplevel(self)
+        self.reminder_window.title("Reminders")
+        self.reminder_window.geometry("300x200")
+
+        # Display reminders or show "No reminders yet" if the list is empty
+        self.reminder_present = ctk.CTkLabel(
+            self.reminder_window,
+            text="\n".join(self.reminders_list) if self.reminders_list else "No reminders yet",
+            justify="left", font=("Modern", 16),
+        )
+        self.reminder_present.pack(pady=10)
+
+        # Add Reminder button
+        ctk.CTkButton(
+            self.reminder_window,
+            text="Add Reminder",
+            command=self.add_reminder,
+        ).pack(pady=10)
+
+        # Remove Reminder button
+        ctk.CTkButton(
+            self.reminder_window,
+            text="Remove Reminder",
+            command=self.remove_reminder,
+            fg_color="red",
+            hover_color="darkred",
+            text_color="white",
+        ).pack(pady=10)
+
+    def add_reminder(self):
+        """Open a window to add a new reminder."""
+        add_reminder_window = ctk.CTkToplevel(self)
+        add_reminder_window.title("Add Reminder")
+        add_reminder_window.geometry("300x150")
+
+        ctk.CTkLabel(add_reminder_window, text="Enter Reminder:").pack(pady=5)
+        reminder_entry = ctk.CTkEntry(add_reminder_window, width=200)
+        reminder_entry.pack(pady=5)
+
+        def save_reminder():
+            """Save the entered reminder."""
+            text = reminder_entry.get().strip()
+            if text:
+                self.reminders_list.append(text) # Add the reminder to the list
+                self.reminder_present.configure(text="\n".join(self.reminders_list)) # Update the label
+            add_reminder_window.destroy()
+
+        ctk.CTkButton(add_reminder_window, text="Save", command=save_reminder).pack(pady=10)
+
+    def remove_reminder(self):
+        """Open a window to remove a reminder."""
+        if not self.reminders_list:
+            # If there are no reminders, show a message
+            messagebox.showinfo("No Reminders", "There are no reminders to remove.")
+            return
+
+        remove_reminder_window = ctk.CTkToplevel(self)
+        remove_reminder_window.title("Remove Reminder")
+        remove_reminder_window.geometry("300x200")
+
+        ctk.CTkLabel(remove_reminder_window, text="Select a Reminder to Remove:").pack(pady=5)
+
+        # Dropdown menu to select a reminder
+        selected_reminder = ctk.StringVar(remove_reminder_window)
+        selected_reminder.set(self.reminders_list[0]) # Set the default value
+        reminder_dropdown = ctk.CTkOptionMenu(
+            remove_reminder_window,
+            variable=selected_reminder,
+            values=self.reminders_list,
+        )
+        reminder_dropdown.pack(pady=5)
+
+        def confirm_removal():
+            """Remove the selected reminder."""
+            reminder_to_remove = selected_reminder.get()
+            if reminder_to_remove in self.reminders_list:
+                self.reminders_list.remove(reminder_to_remove) # Remove the reminder from the list
+                self.reminder_present.configure(
+                    text="\n".join(self.reminders_list) if self.reminders_list else "No reminders yet"
+                ) # Update the label
+            remove_reminder_window.destroy()
+
+        ctk.CTkButton(
+            remove_reminder_window,
+            text="Remove",
+            fg_color="red",
+            hover_color="darkred",
+            text_color="white",
+            command=confirm_removal,
+        ).pack(pady=10)
 
 # Create the main Tkinter window
 root = App()
