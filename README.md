@@ -28,6 +28,7 @@ Better Calendar is a calendar interface designed with college students in mind. 
 **Challenges**:
 - Trying to save the user's inputs
 - Communication
+
 **Improvement Considerations**:
 - Consider writing in JavaScript or React
 - Proper implementation of GitHub branches for developing ideas
